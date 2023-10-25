@@ -1,10 +1,14 @@
 package com.example.exchange.controller;
 
 import com.example.exchange.domain.request.DeleteRequest;
+import com.example.exchange.domain.request.FindRequest;
 import com.example.exchange.domain.request.InsertRequest;
+import com.example.exchange.domain.response.FindAllResponse;
 import com.example.exchange.service.ExchangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,9 +17,13 @@ public class ExchangeController {
 
     private final ExchangeService exchangeService;
 
-//    @GetMapping  // 거래소 들어가면 바로 보여주는거
-//    public findAllResponse findAll(){
-//
+    @GetMapping("/all")  // 거래소 들어가면 바로 보여주는거
+    public List<FindAllResponse> findAll(){
+        return exchangeService.findAll();
+    }
+//    @PostMapping("/filter") // 필터
+//    public List<FindAllResponse> findOrderBy(@RequestBody FindRequest request){
+//        return exchangeService.findFilter(request);
 //    }
 
     @PostMapping("/insert")
