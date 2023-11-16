@@ -5,26 +5,24 @@ import com.example.exchange.domain.entity.Exchange;
 import java.util.UUID;
 
 public record InsertRequest(
-        UUID userId,
-        UUID itemId,
+        UUID userUUID,
+        Long itemId,
         String name,
         String grade,
-        String type,
+        String species,
         Integer buff,
-        Integer price,
-        String division
+        Integer price
 ) {
     public Exchange toEntity(){
         return Exchange
                 .builder()
-                .userId(userId)
+                .userId(userUUID)
                 .itemId(itemId)
                 .name(name)
                 .grade(grade)
-                .type(type)
+                .type(species)
                 .buff(buff)
                 .price(price)
-                .division(division)
                 .build();
     }
 }

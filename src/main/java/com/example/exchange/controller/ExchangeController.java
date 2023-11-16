@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/exchange")
+@RequestMapping("/api/v1/market")
 public class ExchangeController {
 
     private final ExchangeService exchangeService;
@@ -21,10 +21,17 @@ public class ExchangeController {
     public List<FindAllResponse> findAll(){
         return exchangeService.findAll();
     }
-//    @PostMapping("/filter") // 필터
-//    public List<FindAllResponse> findOrderBy(@RequestBody FindRequest request){
-//        return exchangeService.findFilter(request);
-//    }
+
+    @PostMapping("/filter/{type}") // type 을 받아서 조회결과를 보여줌
+    public List<FindAllResponse> findAllByFilter(@PathVariable("type") String type){
+        System.out.println("받는타입 " + type);
+        return exchangeService.findAllByFilter(type);
+    }
+
+    @PostMapping("/search/{word}") // 검색기능
+    public List<FindAllResponse> search(@PathVariable("word") String word){
+        return exchangeService.search(word);
+    }
 
     @PostMapping("/insert")
     public void insert(@RequestBody InsertRequest request){ // 거래소 등록

@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public record DeleteRequest(
         UUID userId,
-        UUID itemId
+        Long itemId
 ) {
 
 }

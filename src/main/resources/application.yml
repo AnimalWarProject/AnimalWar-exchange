@@ -1,17 +1,26 @@
 spring:
+  application:
+    name: market-service
   datasource:
     url: jdbc:mysql://localhost:3306/inventory?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 1q2w3e4r!!
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
-#  kafka:
-#    consumer:
-#      bootstrap-servers: localhost:9092
-#      group-id: foo
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-#      auto-offset-reset: earliest
-#      enable-auto-commit: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      group-id: market
+      auto-offset-reset: earliest
+server:
+  port: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

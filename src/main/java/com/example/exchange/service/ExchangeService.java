@@ -27,25 +27,38 @@ public class ExchangeService {
                 e.getGrade(),
                 e.getType(),
                 e.getBuff(),
-                e.getPrice(),
-                e.getDivision()
+                e.getPrice()
         )).toList();
     }
 
-//    public List<FindAllResponse> findFilter(FindRequest request){
-//        if (request.word().isEmpty()){ // grade와 type을 둘다 받았을때
-//            if (request.grade().isEmpty()){ // type만 받았을때
-//                List<FindAllResponse> filterByType = exchangeRepository.findFilterByType(request.type());
-//                return filterByType;
-//            }else {
-//                List<FindAllResponse> filterByGrade = exchangeRepository.findFilterByGrade(request.grade());
-//                return filterByGrade;
-//            }
-//        }else {
-//            List<FindAllResponse> search = exchangeRepository.search(request.word());
-//            return search;
-//        }
-//    }
+    public List<FindAllResponse> findAllByFilter(String type){ // serchBox에 있는 타입 필터
+        List<Exchange> byType = exchangeRepository.findByTypes(type);
+        System.out.println("type : " + type);
+        System.out.println("결과 : " + byType);
+        return byType.stream().map((e)->new FindAllResponse(
+                e.getUserId(),
+                e.getItemId(),
+                e.getName(),
+                e.getGrade(),
+                e.getType(),
+                e.getBuff(),
+                e.getPrice()
+        )).toList();
+    }
+
+    public List<FindAllResponse> search(String word){ // 검색기능
+        List<Exchange> search = exchangeRepository.searchByWord(word);
+        System.out.println("검색 글자 : " + word);
+        System.out.println("결과 : " + search);
+        return search.stream().map((e)-> new FindAllResponse(
+                e.getUserId(),
+                e.getItemId(),
+                e.getName(),
+                e.getGrade(),
+                e.getType(),
+                e.getBuff(),
+                e.getPrice())).toList();
+    }
 
     public void insert(InsertRequest request){
         exchangeRepository.save(request.toEntity());

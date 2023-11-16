@@ -4,12 +4,11 @@ import java.util.UUID;
 
 public record FindAllResponse(
         UUID userId,
-        UUID itemId,
+        Long itemId,
         String name,
         String grade,
         String type,
         Integer buff,
-        Integer price,
-        String division
+        Integer price
 ) {
 }
