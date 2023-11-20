@@ -9,6 +9,7 @@ public record FindAllResponse(
         String grade,
         String type,
         Integer buff,
-        Integer price
+        Integer price,
+        Boolean btnState
 ) {
 }

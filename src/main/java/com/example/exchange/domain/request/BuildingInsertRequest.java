@@ -4,13 +4,12 @@ import com.example.exchange.domain.entity.Exchange;
 
 import java.util.UUID;
 
-public record InsertRequest(
+public record BuildingInsertRequest(
         UUID userUUID,
         Long itemId,
         String name,
         String grade,
         String species,
-        Integer buff,
         Integer price
 ) {
     public Exchange toEntity(){
@@ -21,8 +20,8 @@ public record InsertRequest(
                 .name(name)
                 .grade(grade)
                 .type(species)
-                .buff(buff)
                 .price(price)
+                .btnState(true)
                 .build();
     }
 }

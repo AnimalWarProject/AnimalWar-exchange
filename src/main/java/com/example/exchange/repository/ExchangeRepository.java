@@ -20,8 +20,12 @@ public interface ExchangeRepository extends JpaRepository<Exchange, UUID> {
     @Query("SELECT E FROM Exchange E WHERE E.itemId=:itemId AND E.userId=:userId")
     Optional<Exchange> checkById(Long itemId, UUID userId);
 
+    @Query("SELECT E FROM Exchange E WHERE E.userId=:userUUID AND E.itemId=:itemId")
+    Optional<Exchange> findByIdAndItemId(UUID userUUID, Long itemId);
+
     @Modifying
     @Query("DELETE FROM Exchange E WHERE E.itemId=:itemId AND E.userId=:userId")
     void deleteById(Long itemId, UUID userId);
+
 
 }

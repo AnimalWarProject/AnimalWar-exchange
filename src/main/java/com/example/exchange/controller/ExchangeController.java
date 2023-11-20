@@ -1,8 +1,7 @@
 package com.example.exchange.controller;
 
 import com.example.exchange.domain.request.DeleteRequest;
-import com.example.exchange.domain.request.FindRequest;
-import com.example.exchange.domain.request.InsertRequest;
+import com.example.exchange.domain.request.AnimalInsertRequest;
 import com.example.exchange.domain.response.FindAllResponse;
 import com.example.exchange.service.ExchangeService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,7 @@ public class ExchangeController {
     }
 
     @PostMapping("/insert")
-    public void insert(@RequestBody InsertRequest request){ // 거래소 등록
+    public void insert(@RequestBody AnimalInsertRequest request){ // 거래소 등록
         exchangeService.insert(request);
     }
 

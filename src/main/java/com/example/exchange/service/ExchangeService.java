@@ -1,17 +1,17 @@
 package com.example.exchange.service;
 
 import com.example.exchange.domain.entity.Exchange;
+import com.example.exchange.domain.request.BuyBtnRequest;
 import com.example.exchange.domain.request.DeleteRequest;
-import com.example.exchange.domain.request.FindRequest;
-import com.example.exchange.domain.request.InsertRequest;
+import com.example.exchange.domain.request.AnimalInsertRequest;
 import com.example.exchange.domain.response.FindAllResponse;
 import com.example.exchange.repository.ExchangeRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +27,8 @@ public class ExchangeService {
                 e.getGrade(),
                 e.getType(),
                 e.getBuff(),
-                e.getPrice()
+                e.getPrice(),
+                e.getBtnState()
         )).toList();
     }
 
@@ -42,7 +43,8 @@ public class ExchangeService {
                 e.getGrade(),
                 e.getType(),
                 e.getBuff(),
-                e.getPrice()
+                e.getPrice(),
+                e.getBtnState()
         )).toList();
     }
 
@@ -57,11 +59,22 @@ public class ExchangeService {
                 e.getGrade(),
                 e.getType(),
                 e.getBuff(),
-                e.getPrice())).toList();
+                e.getPrice(),
+                e.getBtnState())).toList();
     }
 
-    public void insert(InsertRequest request){
+    public void insert(AnimalInsertRequest request){
         exchangeRepository.save(request.toEntity());
+    }
+
+    public void buyItem(BuyBtnRequest request){
+        Optional<Exchange> byIdAndItemId = exchangeRepository.findByIdAndItemId(request.userUUID(), request.itemId());
+        if (byIdAndItemId.isPresent()){
+            Exchange exchange = byIdAndItemId.get();
+            exchange.setBtnState(false);
+        }else {
+            System.out.println("잘못된 정보입니다. buy Item");
+        }
     }
 
     @Transactional
