@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ExchangeService {
 
@@ -28,6 +29,7 @@ public class ExchangeService {
                 e.getType(),
                 e.getBuff(),
                 e.getPrice(),
+                e.getImagePath(),
                 e.getBtnState()
         )).toList();
     }
@@ -44,6 +46,7 @@ public class ExchangeService {
                 e.getType(),
                 e.getBuff(),
                 e.getPrice(),
+                e.getImagePath(),
                 e.getBtnState()
         )).toList();
     }
@@ -60,6 +63,7 @@ public class ExchangeService {
                 e.getType(),
                 e.getBuff(),
                 e.getPrice(),
+                e.getImagePath(),
                 e.getBtnState())).toList();
     }
 
@@ -68,6 +72,8 @@ public class ExchangeService {
     }
 
     public void buyItem(BuyBtnRequest request){
+        System.out.println("1" + request.itemId());
+        System.out.println("2" + request.userUUID());
         Optional<Exchange> byIdAndItemId = exchangeRepository.findByIdAndItemId(request.userUUID(), request.itemId());
         if (byIdAndItemId.isPresent()){
             Exchange exchange = byIdAndItemId.get();
@@ -79,8 +85,8 @@ public class ExchangeService {
 
     @Transactional
     public void delete(DeleteRequest request){
-        exchangeRepository.checkById(request.itemId(), request.userId()).orElseThrow(()->new RuntimeException("없는 정보입니다."));
-        exchangeRepository.deleteById(request.itemId(), request.userId());
+        exchangeRepository.checkById(request.itemId(), request.userUUID()).orElseThrow(()->new RuntimeException("없는 정보입니다."));
+        exchangeRepository.deleteById(request.itemId(), request.userUUID());
 
     }
 

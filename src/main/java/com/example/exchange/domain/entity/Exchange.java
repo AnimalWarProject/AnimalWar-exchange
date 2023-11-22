@@ -20,5 +20,6 @@ public class Exchange {
     private String type;
     private Integer buff; // 강화 수
     private Integer price; // 가격
+    private String imagePath; // 이미지 경로
     private Boolean btnState; // 구매버튼 상태 즉, 구매가능상태
 }

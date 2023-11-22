@@ -36,8 +36,4 @@ public class MarketInsertConsumer {
         System.out.println("cancel A consumer : "+request);
         exchangeService.delete(request);
     }
-
-
-
-
 }

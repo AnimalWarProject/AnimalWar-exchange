@@ -32,13 +32,15 @@ public class ExchangeController {
         return exchangeService.search(word);
     }
 
-    @PostMapping("/insert")
-    public void insert(@RequestBody AnimalInsertRequest request){ // 거래소 등록
-        exchangeService.insert(request);
-    }
+//    @PostMapping("/insert")
+//    public void insert(@RequestBody AnimalInsertRequest request){ // 거래소 등록
+//        exchangeService.insert(request);
+//    }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody DeleteRequest request){ // 판매되면 물품 삭제 
-        exchangeService.delete(request); // todo : 그리고 인벤토리에 save 보내야함
-    }
+//    @PostMapping("/delete")
+//    public void delete(@RequestBody DeleteRequest request){ // 판매되면 물품 삭제
+//        System.out.println(request.userId());
+//        System.out.println(request.itemId());
+//        exchangeService.delete(request); // todo : 그리고 인벤토리에 save 보내야함
+//    }
 }

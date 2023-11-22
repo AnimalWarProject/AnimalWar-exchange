@@ -11,7 +11,8 @@ public record AnimalInsertRequest(
         String grade,
         String species,
         Integer buff,
-        Integer price
+        Integer price,
+        String imagePath
 ) {
     public Exchange toEntity(){
         return Exchange
@@ -23,6 +24,7 @@ public record AnimalInsertRequest(
                 .type(species)
                 .buff(buff)
                 .price(price)
+                .imagePath(imagePath)
                 .btnState(true)
                 .build();
     }

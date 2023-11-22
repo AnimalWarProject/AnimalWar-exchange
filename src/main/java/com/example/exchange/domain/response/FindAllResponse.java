@@ -10,6 +10,7 @@ public record FindAllResponse(
         String type,
         Integer buff,
         Integer price,
+        String imagePath,
         Boolean btnState
 ) {
 }
