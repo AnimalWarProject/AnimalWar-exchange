@@ -36,8 +36,6 @@ public class ExchangeService {
 
     public List<FindAllResponse> findAllByFilter(String type){ // serchBox에 있는 타입 필터
         List<Exchange> byType = exchangeRepository.findByTypes(type);
-        System.out.println("type : " + type);
-        System.out.println("결과 : " + byType);
         return byType.stream().map((e)->new FindAllResponse(
                 e.getUserId(),
                 e.getItemId(),
@@ -53,8 +51,6 @@ public class ExchangeService {
 
     public List<FindAllResponse> search(String word){ // 검색기능
         List<Exchange> search = exchangeRepository.searchByWord(word);
-        System.out.println("검색 글자 : " + word);
-        System.out.println("결과 : " + search);
         return search.stream().map((e)-> new FindAllResponse(
                 e.getUserId(),
                 e.getItemId(),
@@ -72,8 +68,6 @@ public class ExchangeService {
     }
 
     public void buyItem(BuyBtnRequest request){
-        System.out.println("1" + request.itemId());
-        System.out.println("2" + request.userUUID());
         Optional<Exchange> byIdAndItemId = exchangeRepository.findByIdAndItemId(request.userUUID(), request.itemId());
         if (byIdAndItemId.isPresent()){
             Exchange exchange = byIdAndItemId.get();
